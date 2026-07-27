@@ -14,7 +14,6 @@ dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
 !.vscode/extensions.json
 .idea
 .history
@@ -29,3 +28,4 @@ dist-ssr
 
 # Contentlayer
 .contentlayer
+config.bat

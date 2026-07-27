@@ -1,0 +1,23 @@
+.colors{
+    margin: 1rem 0;
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+}
+.colors button.item {
+    flex: 0 0 50px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    font-size: 0;
+    border-radius: 100%;
+}
+.colors button{
+    padding: 5px !important;
+}
+.bg-to-b{
+    background-image: linear-gradient(to bottom, transparent 50%,currentColor 50%);
+}
+.bg-to-t{
+    background-image: linear-gradient(to top, transparent 50%,currentColor 50%);
+}

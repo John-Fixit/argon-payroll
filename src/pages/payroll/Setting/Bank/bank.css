@@ -1,0 +1,16 @@
+.header_h2{
+    font-family: Exo\ 2,Helvetica Neue,Arial,sans-serif;
+    font-weight: 600;
+    font-size: 1.999rem;
+    color: #272c33;
+}
+.page-separator__text {
+    max-width: 90%;
+    text-transform: uppercase;
+    font-size: .9375rem;
+    color: #272c33;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-family: Exo\ 2,Helvetica Neue,Arial,sans-serif;
+}
+

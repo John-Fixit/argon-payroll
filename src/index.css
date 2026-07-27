@@ -1,0 +1,363 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700%7COswald:300,400,500,700%7CRoboto:400,500%7CExo+2:600&amp;display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Judson:ital,wght@0,400;0,700;1,900;1,100;1,300;0,500;1,400;1,500;1,700;1,900&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400..900&display=swap');
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap'); */
+
+@import "rsuite/dist/rsuite.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-Lato  dark:!text-gray-100 dark:!bg-slate-800 !bg-white;
+  }
+
+  body {
+    @apply bg-lighten dark:!text-gray-100 dark:!bg-slate-800;
+    font-family: Exo\2, Helvetica Neue, Arial, sans-serif;
+  }
+  /* body {
+    font-family: 'Nunito Sans', sans-serif;
+  } */
+
+  h1 {
+    @apply text-xl font-medium capitalize;
+  }
+}
+
+* {
+  font-family: Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.font-Exotic {
+  font-family: Exo\2, Helvetica Neue, Arial, sans-serif !important;
+}
+
+.drawer_container::-webkit-scrollbar {
+  display: none;
+}
+
+.link {
+  @apply mr-4 px-7 w-[15rem] flex rounded-tr-[0.65rem] gap-2 items-center md:cursor-pointer cursor-default duration-300  !text-menuItemColor hover:!text-white hover:no-underline visited:text-white  font-[500] text-[15px] leading-10;
+}
+.link-sub-menu {
+  @apply mr-4 pl-7  w-[15rem] flex  gap-x-2 items-center md:cursor-pointer cursor-default duration-300  !text-menuItemColor hover:!text-white hover:no-underline visited:text-white  font-[500] text-[14.5px] leading-8;
+}
+
+.link-sub-menu3 {
+  @apply mr-4 pl-3  w-[21.8rem] flex flex-col items-start gap-x-2 md:cursor-pointer cursor-default duration-300  !text-menuItemColor hover:!text-white hover:no-underline visited:text-white  font-[500] text-[14.5px] leading-8;
+}
+.link-sub-menu4 {
+  @apply pl-5  w-[21.8rem] flex flex-col items-start gap-x-2 md:cursor-pointer cursor-default duration-300  !text-menuItemColor hover:!text-white hover:no-underline visited:text-white  font-[500] text-[13.5px] leading-8;
+}
+
+.link2 {
+  @apply p-2.5 mr-4 px-4 w-[15rem] flex rounded-md gap-2 items-center md:cursor-pointer cursor-default duration-300 font-medium text-menuItemColor hover:text-white hover:no-underline;
+}
+.link3 {
+  @apply p-2.5  px-4 py-4  my-1 flex  gap-2 gap-y-3 items-center md:cursor-pointer cursor-default duration-300 font-medium text-menuItemColor hover:text-white hover:no-underline;
+}
+.link4 {
+  @apply p-2.5  px-4 py-4  my-1 flex  gap-2 gap-y-3 items-center md:cursor-pointer cursor-default duration-300 font-medium text-menuItemColor hover:text-white  hover:no-underline;
+}
+
+.active {
+  @apply !text-white;
+}
+
+.menuScrollBar::-webkit-scrollbar-thumb {
+  @apply rounded-md h-[35rem];
+}
+
+.animateReaction:hover {
+  animation: bounce 2s ease-in-out;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.modal-contents::-webkit-scrollbar {
+  width: 0;
+}
+
+.blur-up {
+  filter: blur(2px);
+  transition: filter 0.4s;
+}
+.blur-up-cover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(99deg, #d83565, #bb35d8);
+  opacity: 0.8;
+  z-index: 20;
+}
+
+.text-xxs {
+  font-size: 0.6rem;
+}
+
+.lightbtn {
+  background-color: rgba(237, 247, 251, 0.2);
+}
+.lightbtn-md {
+  background-color: rgba(237, 247, 251, 0.9);
+}
+
+.lightsmbtn {
+  background-color: rgba(237, 247, 251, 0.4);
+}
+
+.center-profile {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  position: relative;
+}
+
+.center-profile {
+  /* background-image: url(/assets/images/center-profile.jpeg); */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: block;
+}
+
+.center-profile:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 126%;
+  height: 126%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 100%;
+  animation: wave 1s linear 0s infinite;
+}
+
+.center-profile2 {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  position: relative;
+}
+
+.center-profile2 {
+  /* background-image: url(/assets/images/center-profile.jpeg); */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: block;
+}
+
+.center-profile2:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 126%;
+  height: 126%;
+  background-color: rgba(212, 205, 205, 0.4);
+  border-radius: 100%;
+  animation: wave 2s linear 0s infinite;
+}
+
+@keyframes wave {
+  0% {
+    width: 126%;
+    height: 126%;
+    opacity: 1;
+  }
+  100% {
+    width: 150%;
+    height: 150%;
+    opacity: 0;
+  }
+}
+
+.minichatOptions {
+  position: absolute;
+  right: 13px;
+  bottom: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 10px 5px;
+  border-radius: 20px;
+  box-shadow: 0 5px 7px 1px rgba(0, 0, 0, 0.09);
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.minichatOptionsShow {
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+  bottom: 100%;
+  transition: all 0.5s ease;
+}
+
+.postBgOptions {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  /* top: 0px; */
+  height: fit-content;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 10px 5px;
+  border-radius: 20px;
+  box-shadow: 0 5px 7px 1px rgba(0, 0, 0, 0.09);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  z-index: 3;
+  transition: all 0.9s ease;
+  visibility: hidden;
+}
+
+.postBgOptionsShow {
+  opacity: 1;
+  visibility: visible;
+  /* height: auto; */
+  left: 100px;
+  /* bottom: 100%; */
+  transition: all 0.9s ease;
+}
+
+.chatbarInput {
+  position: absolute;
+  right: 0px;
+  /* top: 0px; */
+  /* top: 0px; */
+  height: fit-content;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 10px 5px;
+  border-radius: 20px;
+  box-shadow: 0 5px 7px 1px rgba(0, 0, 0, 0.09);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  z-index: 3;
+  transition: all 0.9s ease;
+  visibility: hidden;
+}
+
+.chatbarInputShow {
+  opacity: 1;
+  visibility: visible;
+  /* height: auto; */
+  right: 50px;
+  width: 200px;
+  box-shadow: 2px 2px 4px rgb(197, 233, 242);
+  /* bottom: 100%; */
+  z-index: 100;
+  transition: all 0.9s ease;
+}
+
+.chatInp {
+  opacity: 0;
+  transition: all 1.9s ease;
+  visibility: hidden;
+  width: 0;
+}
+
+.chatInpShow {
+  width: 100%;
+  opacity: 1;
+  visibility: visible;
+  transition: all 1.9s ease;
+}
+
+.chatw {
+  width: calc(100% - 32rem);
+}
+
+.chatw-lg {
+  width: calc(100% - 16rem);
+}
+
+.chatw-sm {
+  width: calc(100%);
+}
+
+.moreLink {
+  position: absolute;
+  right: 0px;
+  /* height: fit-content; */
+  width: 0;
+  opacity: 0;
+  transition: all 0.9s ease;
+  visibility: hidden;
+}
+
+.moreLinkShow {
+  opacity: 1;
+  visibility: visible;
+  /* height: auto; */
+  /* right: 50px; */
+  width: 100%;
+  /* bottom: 100%; */
+  /* z-index: 100; */
+  transition: all 0.9s ease;
+}
+
+.table_default_hor_scrollbar::-webkit-scrollbar {
+  display: none !important; /* Hide scrollbar for WebKit browsers */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.myname {
+  color: #00bcc2;
+  color: #f5f7fa;
+  color: #2c3032;
+  color: #00bcc2;
+  color: #00979c;
+  color: #4aa2ee;
+  color: #8a9199;
+  color: #272c33;
+  color: #9b9d9f;
+}
+
+/* sidebar text(short cut) = 8A9199
+
+when menu is dropped down = 272C33
+overview color = 949799 */

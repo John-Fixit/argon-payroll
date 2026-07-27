@@ -12,7 +12,7 @@ export default function Salary() {
     <>
       <Card className="  shadow-md  my-6 container mx-auto p-4">
         <h1 className="text-[1.2rem] font-medium font-helvetica text-gray-600 my-3">
-          Salary Information
+          Payslip Information
         </h1>
         <SalaryTable data={data?.payslips} isLoading={isLoading} />
       </Card>

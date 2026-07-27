@@ -25,13 +25,15 @@ function RootLayout() {
       <div className="flex w-full ">
         {/* {currentHomeSidemenu === null ? <DefaultSidebar /> : <Sidebar />} */}
         <Sidebar />
+        {/* Margin must mirror the width Sidebar actually animates to,
+            keyed off the same state it uses (sidebarMinimized/sidebarOpen). */}
         <div
-          className={`w-full min-h-[93vh] ${
-            sidebarMinimizedHome
-              ? "lg:ml-[7.5rem]"
+          className={`w-full min-h-[93vh] transition-[margin] duration-200 ${
+            sidebarMinimized && sidebarOpen
+              ? "md:ml-[7.5rem]"
               : sidebarOpen
-                ? "lg:ml-64"
-                : !sidebarMinimizedHome && !sidebarOpen && "lg:ml-0"
+                ? "md:ml-64"
+                : "ml-0"
           }`}
         >
           {pathname.includes("/home") ? (

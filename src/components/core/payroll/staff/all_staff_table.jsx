@@ -406,7 +406,7 @@ export default function AllCompanyStaffTable({
   }, [items, generateTableHead]);
   return (
     <>
-      <div className="bg-white p-4 rounded-[14px]">
+      <div className="bg-white p-4 rounded-[14px] w-full max-w-full min-w-0 overflow-x-clip">
         <div className="flex justify-between items-center">
           <div>
             <Input
@@ -434,14 +434,14 @@ export default function AllCompanyStaffTable({
             </label>
           </div>
         </div>
-        <div className="relative">
+        <div className="relative w-full max-w-full min-w-0">
           <div
             ref={tableContainerRef}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onScroll={() => syncScroll(tableContainerRef, scrollbarRef)}
-            className="pb-10 overflow-x-scroll pe-5 rounded-b-[14px] md:max-w-[900px] xl:max-w-[1350px]"
+            className="pb-10 overflow-x-auto pe-5 rounded-b-[14px] w-full max-w-full min-w-0"
           >
             <Table
               isStriped
@@ -491,7 +491,7 @@ export default function AllCompanyStaffTable({
           </div>
           <div
             ref={scrollbarRef}
-            className="fixed bottom-0 left-0 right-0 h-4 overflow-x-auto scrollbar-visible"
+            className="absolute bottom-0 left-0 right-0 h-4 max-w-full overflow-x-auto scrollbar-visible"
             onScroll={() => syncScroll(scrollbarRef, tableContainerRef)}
           >
             <div className="h-4"></div>{" "}

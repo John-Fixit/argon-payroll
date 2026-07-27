@@ -29,11 +29,11 @@ const SubMenuSidebar = () => {
   return (
     <>
       {sidebarOpen && sidebarMinimized && showminimizedsubMenu && (
-        <div className="relative bg-sidebarBg w-[93%] z-[99999]">
+        <div className="relative bg-[#0F172A] w-[93%] z-[99999]">
           <div
-            className="md:z-[9] z-[99999] max-w-[16rem]  w-[16rem] 
+            className="md:z-[9] z-[99999] max-w-[16rem]  w-[16rem]
                 fixed top-0 left-[7.5rem]
-              h-screen  dark:!text-gray-100 bg-sidebarBg"
+              h-screen  border-l border-white/10 dark:!text-slate-300 bg-[#0F172A]"
           >
             <div className="flex flex-col  h-full">
               <ul className="whitespace-pre text-[0.9rem] py-5 flex flex-col gap-1 overflow-x-hidden  font-medium  scrollbar-thin dark:scrollbar-track-slate-400  scrollbar-track-white scrollbar-thumb-slate-100 dark:scrollbar-thumb-slate-700  md:h-[78%] h-[75%]  px-0">

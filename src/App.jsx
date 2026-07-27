@@ -69,6 +69,7 @@ import Allstaff from "./pages/payroll/staff/Allstaff";
 import NonMember from "./pages/payroll/staff/NonMember";
 import AwaitingPayrollStaff from "./pages/payroll/staff/Awaiting";
 import Suspension from "./pages/payroll/staff/Suspension";
+import UserSalary from "./pages/payroll/user/Salary";
 import Loans from "./pages/payroll/Payroll/Loans/Loans";
 import Contribution from "./pages/payroll/Payroll/Contribution/Contribution";
 import Cooperative from "./pages/payroll/Payroll/Cooperative/Cooperative";
@@ -224,6 +225,7 @@ const App = () => {
             <Route path="staff/non_membership" element={<NonMember />} />
             <Route path="staff/suspension" element={<Suspension />} />
             <Route path="staff/awaiting" element={<AwaitingPayrollStaff />} />
+            <Route path="user/payslip" element={<UserSalary />} />
 
             <Route path="13thmonth" element={<ThirteenthMonth />} />
             <Route path="payrun" element={<PayRunView />} />

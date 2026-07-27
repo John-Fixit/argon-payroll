@@ -14,6 +14,8 @@ import ChatDrawer from "../../pages/home/rightMenu/components/ChatDrawer";
 import { useNavigate } from "react-router-dom";
 import SearchProfile from "../SearchProfile";
 import useCurrentUser from "../../hooks/useCurrentUser";
+import { filePrefix } from "../../utils/filePrefix";
+import { ChevronDown } from "lucide-react";
 
 const getFilteredSideMenu = (sideMenu, userData) => {
   // Create a copy of the side menu to avoid mutating the original
@@ -180,16 +182,44 @@ const Sidebar = () => {
 
   const filteredSideMenu = getFilteredSideMenu(sideMenu, userData);
 
+  const userName =
+    `${userData?.data?.LAST_NAME ?? ""} ${userData?.data?.FIRST_NAME ?? ""}`.trim();
+  const userInitial =
+    userData?.data?.FIRST_NAME?.trim()?.[0]?.toUpperCase() ?? "U";
+  const userRole = userData?.data?.IS_ADMINISTRATOR
+    ? "Administrator"
+    : userData?.data?.IS_HR
+      ? "HR"
+      : userData?.data?.IS_SALARY
+        ? "Payroll Manager"
+        : "Staff";
+
+  // shared nav-item styling for the flat (no submenu) routes
+  const navItemClass = (isActive) =>
+    `group/navitem flex items-center gap-3 rounded-xl px-3 py-2 text-[14px] font-medium transition-colors hover:bg-white/5 hover:text-white hover:no-underline ${
+      isActive ? "bg-white/10 text-white" : "text-slate-300"
+    } ${
+      sidebarMinimized
+        ? "flex-col justify-center gap-1 px-1 py-3 text-center text-[11px] leading-tight"
+        : ""
+    }`;
+
+  const navIconClass = (isActive) =>
+    `min-w-max shrink-0 transition-colors group-hover/navitem:text-white ${
+      isActive ? "text-white" : "text-slate-400"
+    }`;
+
   return (
-    <div className="relative bg-sidebarBg shadow-sidebar">
+    <div className="relative bg-[#0F172A] shadow-sidebar">
       <div
         onClick={() => overlayClicked()}
-        className={`md:hidden fixed inset-0 max-h-screen z-[90] bg-chatoverlay cursor-pointer ${
+        aria-hidden="true"
+        className={`lg:hidden fixed inset-0 z-[90] cursor-pointer bg-slate-900/50 backdrop-blur-sm ${
           sidebarOpen ? "block" : "hidden"
-        } `}
+        }`}
       ></div>
       <SubMenuSidebar />
-      <motion.div
+      <motion.aside
         ref={sidebarRef}
         variants={Nav_animation}
         initial={{ x: isTablet ? -350 : 0 }}
@@ -200,121 +230,91 @@ const Sidebar = () => {
               ? "open"
               : "closed"
         }
-        className="shadow-sidebar group  lg:z-[49] z-[91] max-w-[16rem]  w-[16rem] 
-             fixed top-0 left-0
-           h-screen  dark:!text-gray-100 bg-sidebarBg"
+        className="group fixed inset-y-0 left-0 z-[91] lg:z-[49] flex h-screen w-[16rem] max-w-[16rem] flex-col overflow-hidden
+             bg-gradient-to-b from-[#1E293B] via-[#1B2638] to-[#0F172A] text-slate-300 shadow-sidebar dark:!text-slate-300"
       >
-        {/* top bar */}
-        <div className="flex flex-col  h-full ">
-          <ul className="whitespace-pre text-[0.9rem] flex flex-col overflow-x-hidden font-medium  scrollbar-thin scrollbar-thumb-transparent  group-hover:scrollbar-thumb-scrollbarColor scrollbar-track-transparent menuScrollBar  h-full  px-0  pb-20">
-            {/* logo & search section */}
-            <div
-              className={`flex flex-col bg-sidebarBg  ${
-                sidebarMinimized && " h-28"
-              }`}
-            >
-              <div
-                className={`w-full   flex-col gap-4 justify-center p-1 px-3 items-center`}
-              >
-                <div
-                  className={`mr-8 py-2  pt-4 cursor-pointer  ${
-                    sidebarMinimized ? "hidden" : "block"
-                  }`}
-                  onClick={routeToHome}
-                >
-                  <img
-                    src="/assets/images/community_logo_light.png"
-                    alt="comuneety-logo"
-                  />
-                </div>
-              </div>
+        {/* Logo */}
+        <div
+          onClick={routeToHome}
+          className={`flex shrink-0 cursor-pointer items-center gap-3 py-5 ${
+            sidebarMinimized ? "justify-center px-2" : "px-5"
+          }`}
+        >
+          <img
+            src="/NCAA.png"
+            alt="NCAA"
+            className="h-11 w-11 shrink-0 rounded-full border-4 border-white object-cover shadow-md"
+          />
+          {!sidebarMinimized && (
+            <div className="flex flex-col leading-tight">
+              <span className="text-[15px] font-bold text-white">
+                Nigerian Civil
+              </span>
+              <span className="text-[15px] font-bold text-white">
+                Aviation Authority
+              </span>
             </div>
-            {filteredSideMenu?.map((route, i) => (
-              <Fragment key={i}>
-                <div className="p-0">
-                  {!sidebarMinimized && route?.title && (
-                    <small
-                      className={`mx-[1.2rem] text-menuItemTitle font-bold text-sm inline-block tracking-widest px-2 mb-2 font-Lato ${
-                        i === 0 ? "pt-3" : "pt-7"
-                      }`}
-                    >
-                      {route.title?.toLocaleUpperCase()}
-                    </small>
-                  )}
+          )}
+        </div>
+
+        {/* Nav */}
+        <nav className="scrollbar-slim flex-1 overflow-y-auto overflow-x-hidden px-3 pb-4">
+          {filteredSideMenu?.map((route, i) => (
+            <Fragment key={i}>
+              <div className={i === 0 ? "mt-1" : "mt-5"}>
+                {!sidebarMinimized && route?.title && (
+                  <p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+                    {route.title?.toLocaleUpperCase()}
+                  </p>
+                )}
+                <ul className="space-y-1">
                   {route?.withSubMenu ? (
-                    <>
-                      <div className=" w-full p-0">
-                        {route.submenu?.map((menu, i) => (
-                          <div key={i} className="flex flex-col gap-1">
-                            <SubMenu
-                              data={menu}
-                              routeMerge={route?.routeMerge}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </>
+                    route.submenu?.map((menu, i) => (
+                      <SubMenu
+                        key={i}
+                        data={menu}
+                        routeMerge={route?.routeMerge}
+                      />
+                    ))
                   ) : (
                     <>
                       {route?.name?.toLowerCase() === "chat room" ? (
-                        <li
-                          className={` ${
-                            sidebarMinimized &&
-                            "border-b border-gray-800 py-0  hover:text-white "
-                          }`}
-                        >
+                        <li>
                           <div
                             onClick={openMessageRoom}
-                            className={`group/navitem ${
-                              sidebarMinimized
-                                ? "flex flex-col text-center justify-center hover:no-underline   gap-1 cursor-pointer  duration-300 font-medium text-gray-400"
-                                : "link"
-                            }`}
+                            className={`cursor-pointer ${navItemClass(
+                              pathname.includes(route?.route),
+                            )}`}
                           >
                             <route.icon
-                              size={sidebarMinimized ? 30 : 20}
-                              className={`min-w-max group-hover/navitem:text-menuItemColor ${
-                                sidebarMinimized && "mx-auto"
-                              }
-                                ${
-                                  pathname.includes(route?.route)
-                                    ? "text-white"
-                                    : "text-menuItemIcon"
-                                }`}
+                              size={sidebarMinimized ? 26 : 20}
+                              className={navIconClass(
+                                pathname.includes(route?.route),
+                              )}
                             />
-                            {route?.name}
+                            <span className="flex-1 truncate text-left">
+                              {route?.name}
+                            </span>
                           </div>
                         </li>
                       ) : (
                         route?.name && (
-                          <li
-                            className={` ${
-                              sidebarMinimized &&
-                              "border-b border-gray-800 py-0  hover:text-white "
-                            }`}
-                          >
+                          <li>
                             <NavLink
                               to={route?.enabled ? route?.route : "#"}
-                              className={`group/navitem ${
-                                sidebarMinimized
-                                  ? "flex flex-col text-center justify-center hover:no-underline   gap-1 cursor-pointer  duration-300 font-medium text-gray-400"
-                                  : "link"
-                              }`}
+                              className={navItemClass(
+                                pathname.includes(route?.route),
+                              )}
                             >
                               <route.icon
-                                size={sidebarMinimized ? 30 : 20}
-                                className={`min-w-max group-hover/navitem:text-menuItemColor ${
-                                  sidebarMinimized && "mx-auto"
-                                }
-                                    ${
-                                      pathname.includes(route?.route)
-                                        ? "text-white"
-                                        : "text-menuItemIcon"
-                                    }`}
+                                size={sidebarMinimized ? 26 : 20}
+                                className={navIconClass(
+                                  pathname.includes(route?.route),
+                                )}
                               />
                               <span
-                                className={`${
-                                  !route?.enabled && "text-menuItemIcon"
+                                className={`flex-1 truncate text-left ${
+                                  !route?.enabled && "text-slate-500"
                                 }`}
                               >
                                 {route?.name}
@@ -325,13 +325,48 @@ const Sidebar = () => {
                       )}
                     </>
                   )}
+                </ul>
+              </div>
+            </Fragment>
+          ))}
+        </nav>
+
+        {/* Profile */}
+        <div className="shrink-0 border-t border-white/10 p-3">
+          <button
+            type="button"
+            className={`flex w-full items-center gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-white/5 ${
+              sidebarMinimized ? "justify-center" : ""
+            }`}
+          >
+            {userData?.data?.FILE_NAME ? (
+              <img
+                src={filePrefix + userData.data.FILE_NAME}
+                alt={userName}
+                className="h-10 w-10 shrink-0 rounded-full object-cover ring-2 ring-indigo-500/50"
+              />
+            ) : (
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-sm font-bold text-white">
+                {userInitial}
+              </div>
+            )}
+            {!sidebarMinimized && (
+              <>
+                <div className="min-w-0 flex-1 text-left leading-tight">
+                  <p className="truncate text-sm font-semibold uppercase text-white">
+                    {userName}
+                  </p>
+                  <p className="truncate text-xs text-slate-400">{userRole}</p>
                 </div>
-              </Fragment>
-            ))}
-            {/* menu section */}
-          </ul>
+                <ChevronDown
+                  className="h-4 w-4 shrink-0 text-slate-400"
+                  strokeWidth={2}
+                />
+              </>
+            )}
+          </button>
         </div>
-      </motion.div>
+      </motion.aside>
       {
         <ChatDrawer
           // fromMessageRoom={true} // Message room has been PEND for now

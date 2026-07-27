@@ -286,7 +286,7 @@ export const PeopleSectionMenu = [
   // },
 
   {
-    title: "Payroll",
+    title: "Admin",
     name: "Payroll",
     withSubMenu: true,
     submenu: [
@@ -394,6 +394,26 @@ export const PeopleSectionMenu = [
         ],
       },
       //
+    ],
+  },
+
+  {
+    title: "User",
+    name: "User",
+    withSubMenu: true,
+    submenu: [
+      {
+        name: "My Payslip",
+        icon: LiaConnectdevelop,
+        prefix: "user",
+        menus: [
+          {
+            name: "Payslip",
+            route: "/payroll/user/payslip",
+            enabled: true,
+          },
+        ],
+      },
     ],
   },
 

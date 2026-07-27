@@ -1,0 +1,14 @@
+.header_h3{
+    font-family: Exo\ 2,Helvetica Neue,Arial,sans-serif;
+    /* font-weight: 600;
+    font-size: .8125rem; */
+    line-height: 1.5;
+
+}
+.ant-select-selection-item-content {
+    max-width: 150px; /* Adjust the maximum width as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+    

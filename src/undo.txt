@@ -1,0 +1,123 @@
+import React, { useReducer, useCallback } from 'react';
+
+// Action types
+const ADD_STATE = 'ADD_STATE';
+const UNDO = 'UNDO';
+const REDO = 'REDO';
+
+// Initial state
+const initialState = {
+  past: [],
+  present: null,
+  future: []
+};
+
+// Reducer function
+const reducer = (state, action) => {
+  const { past, present, future } = state;
+  switch (action.type) {
+    case ADD_STATE:
+      return {
+        past: [...past, present],
+        present: action.newState,
+        future: []
+      };
+    case UNDO:
+      const previous = past[past.length - 1];
+      const newPast = past.slice(0, past.length - 1);
+      return {
+        past: newPast,
+        present: previous,
+        future: [present, ...future]
+      };
+    case REDO:
+      const next = future[0];
+      const newFuture = future.slice(1);
+      return {
+        past: [...past, present],
+        present: next,
+        future: newFuture
+      };
+    default:
+      return state;
+  }
+};
+
+// Custom hook for managing undo/redo
+const useUndoRedo = (initialPresent) => {
+  const [state, dispatch] = useReducer(reducer, {
+    past: [],
+    present: initialPresent,
+    future: []
+  });
+
+  const set = useCallback(
+    (newState) => {
+      dispatch({ type: ADD_STATE, newState });
+    },
+    [dispatch]
+  );
+
+  const undo = useCallback(() => {
+    if (state.past.length > 0) {
+      dispatch({ type: UNDO });
+    }
+  }, [state.past, dispatch]);
+
+  const redo = useCallback(() => {
+    if (state.future.length > 0) {
+      dispatch({ type: REDO });
+    }
+  }, [state.future, dispatch]);
+
+  return { state: state.present, set, undo, redo, canUndo: state.past.length > 0, canRedo: state.future.length > 0 };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState } from 'react';
+import { useUndoRedo } from './useUndoRedo'; // Import the custom hook
+
+const UndoRedoExample = () => {
+  const { state, set, undo, redo, canUndo, canRedo } = useUndoRedo('initial state');
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSave = () => {
+    set(inputValue);
+    setInputValue('');
+  };
+
+  return (
+    <div>
+      <input type="text" value={inputValue} onChange={handleInputChange} />
+      <button onClick={handleSave}>Save</button>
+      <button onClick={undo} disabled={!canUndo}>Undo</button>
+      <button onClick={redo} disabled={!canRedo}>Redo</button>
+      <div>Current State: {state}</div>
+    </div>
+  );
+};
+
+export default UndoRedoExample;
